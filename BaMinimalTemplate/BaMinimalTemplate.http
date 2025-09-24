@@ -1,0 +1,6 @@
+@BaMinimalTemplate_HostAddress = http://localhost:5134
+
+GET {{BaMinimalTemplate_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
