@@ -49,11 +49,18 @@ public class JwtService : IJwtService
             }
         }
 
-        // Add Identity roles
-        var roles = await _userManager.GetRolesAsync(user);
-        foreach (var role in roles)
+        // Add Identity roles (with error handling)
+        try
         {
-            claims.Add(new(ClaimTypes.Role, role));
+            var roles = await _userManager.GetRolesAsync(user);
+            foreach (var role in roles)
+            {
+                claims.Add(new(ClaimTypes.Role, role));
+            }
+        }
+        catch (NotSupportedException)
+        {
+            // Role store not implemented, skip roles
         }
 
         var token = new JwtSecurityToken(

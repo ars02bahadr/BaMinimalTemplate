@@ -33,6 +33,7 @@ builder.Services
         options.Password.RequireUppercase = false;
         options.Password.RequireNonAlphanumeric = false;
     })
+    .AddRoles<Microsoft.AspNetCore.Identity.IdentityRole<Guid>>()
     .AddEntityFrameworkStores<ApplicationDbContext>()   
     .AddSignInManager()                                  
     .AddDefaultTokenProviders(); 
@@ -82,11 +83,12 @@ builder.Services.AddSwaggerGen(c =>
     
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = "JWT Authorization header using the Bearer scheme. Enter 'Bearer' [space] and then your token in the text input below.",
+        Description = "JWT Authorization header using the Bearer scheme. Sadece token'ı yazın, 'Bearer ' prefix'i otomatik eklenecek.",
         Name = "Authorization",
         In = ParameterLocation.Header,
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer"
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT"
     });
     
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -126,6 +128,13 @@ app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Minimal API Template v1");
     c.RoutePrefix = string.Empty; // kökten açılsın
+    c.DocumentTitle = "BaMinimalTemplate API";
+    c.DefaultModelsExpandDepth(-1); // Models section'ı gizle
+    c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.List);
+    c.EnableDeepLinking();
+    c.EnableFilter();
+    c.ShowExtensions();
+    c.EnableValidator();
 });
 
 app.UseHttpsRedirection();
@@ -134,6 +143,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
+app.MapAuthEndpoints();
 app.MapUserTypeEndpoints();
 app.MapCategoryEndpoints();
 

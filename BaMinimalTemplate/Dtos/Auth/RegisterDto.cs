@@ -17,5 +17,5 @@ public class RegisterDto
     [Required, Compare(nameof(Password))]
     public string ConfirmPassword { get; set; } = string.Empty;
     
-    public int? UserTypeId { get; set; }
+    public Guid? UserTypeId { get; set; }
 }

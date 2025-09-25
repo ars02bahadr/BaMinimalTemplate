@@ -3,6 +3,7 @@ using BaMinimalTemplate.Models;
 using BaMinimalTemplate.Repositories;
 using BaMinimalTemplate.Repositories.Categories;
 using BaMinimalTemplate.Services;
+using BaMinimalTemplate.Services.Auth;
 using BaMinimalTemplate.Services.Categories;
 
 namespace BaMinimalTemplate.Extensions;
@@ -19,6 +20,7 @@ public static class ServiceCollectionExtensions
         
         services.AddScoped(typeof(IGenericService<,,,,>), typeof(GenericService<,,,,>));
         services.AddScoped<IJwtService, JwtService>();
+        services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IUserTypeService, UserTypeService>();
         services.AddScoped<ICategoryService, CategoryService>();
         
