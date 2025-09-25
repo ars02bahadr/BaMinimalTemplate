@@ -1,3 +1,6 @@
+using AutoMapper;
+using __Namespace__.Dtos.EntityNamePlural;
+
 namespace __Namespace__.Mapping;
 
 public class EntityNameMapper : Profile

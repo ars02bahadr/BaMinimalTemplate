@@ -1,3 +1,7 @@
+using __Namespace__.Services.EntityNamePlural;
+using __Namespace__.Dtos.EntityNamePlural;
+using Microsoft.AspNetCore.Routing;
+
 namespace __Namespace__.Endpoints;
 
 public class EntityNameEndpoints : IEndpoint
