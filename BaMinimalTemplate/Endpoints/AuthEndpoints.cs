@@ -11,11 +11,11 @@ using Microsoft.AspNetCore.Routing;
 
 namespace BaMinimalTemplate.Endpoints;
 
-public static class AuthEndpoints
+public class AuthEndpoints : IEndpoint
 {
-    public static void MapAuthEndpoints(this IEndpointRouteBuilder endpoints)
+    public void MapEndpoints(IEndpointRouteBuilder app)
     {
-        var authGroup = endpoints.MapGroup("/api/auth")
+        var authGroup = app.MapGroup("/api/auth")
             .WithTags("Authentication");
 
         // Login endpoint
@@ -23,7 +23,6 @@ public static class AuthEndpoints
             [FromBody] LoginDto loginDto,
             IAuthService authService) =>
         {
-
             var result = await authService.LoginAsync(loginDto);
             if (result == null)
                 return Results.Unauthorized();
@@ -42,7 +41,6 @@ public static class AuthEndpoints
             [FromBody] RegisterDto registerDto,
             IAuthService authService) =>
         {
-
             var result = await authService.RegisterAsync(registerDto);
             if (result == null)
                 return Results.BadRequest("Kullanıcı oluşturulamadı. Email zaten kullanımda olabilir.");
@@ -60,7 +58,6 @@ public static class AuthEndpoints
             [FromBody] RefreshTokenDto refreshTokenDto,
             IAuthService authService) =>
         {
-
             var result = await authService.RefreshTokenAsync(refreshTokenDto);
             if (result == null)
                 return Results.Unauthorized();
@@ -103,14 +100,13 @@ public static class AuthEndpoints
             ClaimsPrincipal user,
             IAuthService authService) =>
         {
-
             var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userId))
                 return Results.Unauthorized();
 
             var result = await authService.ChangePasswordAsync(
-                userId, 
-                changePasswordDto.CurrentPassword, 
+                userId,
+                changePasswordDto.CurrentPassword,
                 changePasswordDto.NewPassword);
 
             if (!result)
@@ -131,9 +127,8 @@ public static class AuthEndpoints
             [FromBody] ForgotPasswordDto forgotPasswordDto,
             IAuthService authService) =>
         {
-
             var result = await authService.ForgotPasswordAsync(forgotPasswordDto.Email);
-            
+
             // Always return success to prevent email enumeration
             return Results.Ok(new { message = "Eğer email sistemde kayıtlıysa, şifre sıfırlama bağlantısı gönderildi" });
         })
@@ -168,5 +163,3 @@ public static class AuthEndpoints
         .RequireAuthorization();
     }
 }
-
-

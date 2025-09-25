@@ -5,13 +5,12 @@ using Microsoft.AspNetCore.Http;
 
 namespace BaMinimalTemplate.Endpoints;
 
-public static class UserTypeEndpoints
+public class UserTypeEndpoints : IEndpoint
 {
-    public static void MapUserTypeEndpoints(this WebApplication app)
+    public void MapEndpoints(IEndpointRouteBuilder app)
     {
         var userTypes = app.MapGroup("/api/user-types")
             .WithTags("User Types");
-
 
         // Admin endpoints
         var adminUserTypes = userTypes.MapGroup("")

@@ -1,36 +1,37 @@
 using System.Reflection;
-using BaMinimalTemplate.Models;
-using BaMinimalTemplate.Repositories;
-using BaMinimalTemplate.Repositories.Categories;
-using BaMinimalTemplate.Repositories.UserCategories;
-using BaMinimalTemplate.Services;
-using BaMinimalTemplate.Services.Auth;
-using BaMinimalTemplate.Services.Categories;
-using BaMinimalTemplate.Services.UserCategories;
-using BaMinimalTemplate.Services.Users;
+using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using Scrutor;
 
 namespace BaMinimalTemplate.Extensions;
 
-public static class ServiceCollectionExtensions
+public static partial class ServiceCollectionExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        
-        // Repositories
+        // AutoMapper: assembly taraması
+        services.AddSingleton(_ => new MapperConfiguration(cfg =>
+        {
+            cfg.AddMaps(Assembly.GetExecutingAssembly());
+        }).CreateMapper());
+
+        // Generic altyapın
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-        services.AddScoped<IUserTypeRepository, UserTypeRepository>();
-        services.AddScoped<ICategoryRepository, CategoryRepository>();
-        services.AddScoped<IUserCategoryRepository, UserCategoryRepository>();
-        
         services.AddScoped(typeof(IGenericService<,,,,>), typeof(GenericService<,,,,>));
-        services.AddScoped<IJwtService, JwtService>();
-        services.AddScoped<IAuthService, AuthService>();
-        services.AddScoped<IUserService, UserService>();
-        services.AddScoped<IUserTypeService, UserTypeService>();
-        services.AddScoped<ICategoryService, CategoryService>();
-        services.AddScoped<IUserCategoryService, UserCategoryService>();
-        
+
+        // Sonek'e göre otomatik DI (Repository, Service)
+        services.Scan(scan => scan
+            .FromAssemblies(Assembly.GetExecutingAssembly())
+            .AddClasses(c => c.Where(t => t.Name.EndsWith("Repository")))
+                .AsImplementedInterfaces()
+                .WithScopedLifetime()
+            .AddClasses(c => c.Where(t => t.Name.EndsWith("Service")))
+                .AsImplementedInterfaces()
+                .WithScopedLifetime());
+
+        ServiceRegistrationPartial(services);
         return services;
     }
+    
+    static partial void ServiceRegistrationPartial(IServiceCollection services);
 }

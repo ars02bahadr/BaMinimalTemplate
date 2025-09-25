@@ -4,12 +4,13 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 
 namespace BaMinimalTemplate.Endpoints;
 
-public static class CategoryEndpoints
+public class CategoryEndpoints : IEndpoint
 {
-    public static void MapCategoryEndpoints(this WebApplication app)
+    public void MapEndpoints(IEndpointRouteBuilder app)
     {
         var categories = app.MapGroup("/api/categories")
             .WithTags("Categories");

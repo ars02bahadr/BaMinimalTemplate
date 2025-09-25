@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 namespace BaMinimalTemplate.Data;
 
 
-public class ApplicationDbContext 
+public partial class ApplicationDbContext 
     : IdentityDbContext<User, IdentityRole<Guid>, Guid>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -31,6 +31,8 @@ public class ApplicationDbContext
         builder.Entity<UserProfile>().HasQueryFilter(e => !e.IsDeleted);
         builder.Entity<UserType>().HasQueryFilter(e => !e.IsDeleted);
         builder.Entity<Category>().HasQueryFilter(e => !e.IsDeleted);
+        
+        OnModelCreatingPartial(builder);
         
     }
     
@@ -68,4 +70,5 @@ public class ApplicationDbContext
         }
     }
     
+    partial void OnModelCreatingPartial(ModelBuilder builder);
 }

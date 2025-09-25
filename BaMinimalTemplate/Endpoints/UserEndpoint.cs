@@ -4,15 +4,14 @@ using BaMinimalTemplate.Services.Users;
 
 namespace BaMinimalTemplate.Endpoints;
 
-public static class UserEndpoint
+public class UserEndpoint : IEndpoint
 {
-    public static void MapUserEndpoints(this WebApplication app)
+    public void MapEndpoints(IEndpointRouteBuilder app)
     {
-        var users= app.MapGroup("/api/users").WithTags("Users");
-        
+        var users = app.MapGroup("/api/users").WithTags("Users");
+
         var adminUsers = users.MapGroup("")
             .RequireAuthorization();
-
 
         adminUsers.MapGet("/all", async (IUserService userService, int page = 1, int pageSize = 10) =>
         {
@@ -22,7 +21,7 @@ public static class UserEndpoint
         .WithSummary("Get all users")
         .WithDescription("Tüm kullanıcıları listeler. Admin yetkisi gerektirir.")
         .RequireAuthorization("AdminOnly");
-        
+
         adminUsers.MapGet("/{id}", async (Guid id, IUserService userService, ClaimsPrincipal currentUser) =>
         {
             // Kullanıcının kendi bilgilerini görebileceğini veya admin yetkisi olduğunu kontrol et
@@ -34,7 +33,7 @@ public static class UserEndpoint
 
             // Kullanıcı kendi bilgilerini görmek istiyorsa veya admin yetkisi varsa izin ver
             bool canView = currentUserGuid == id || currentUser.HasClaim("permissions", "admin:full");
-            
+
             if (!canView)
             {
                 return Results.Forbid();
@@ -46,7 +45,7 @@ public static class UserEndpoint
         .WithSummary("Get user")
         .WithDescription("Kendi bilgilerinizi görebilir veya admin yetkisi gerektirir.")
         .RequireAuthorization();
-        
+
         adminUsers.MapPost("/", async (UserCreateDto dto, IUserService userService) =>
         {
             var user = await userService.CreateAsync(dto);
@@ -55,7 +54,7 @@ public static class UserEndpoint
         .WithSummary("Create user")
         .WithDescription("Yeni kullanıcı oluşturur. Admin yetkisi gerektirir.")
         .RequireAuthorization("AdminOnly");
-        
+
         adminUsers.MapPut("/{id}", async (Guid id, UserUpdateDto dto, IUserService userService, ClaimsPrincipal currentUser) =>
         {
             // Kullanıcının kendisini güncelleyip güncelleyemeyeceğini kontrol et
@@ -67,7 +66,7 @@ public static class UserEndpoint
 
             // Kullanıcı kendisini güncelliyorsa veya admin yetkisi varsa izin ver
             bool canUpdate = currentUserGuid == id || currentUser.HasClaim("permissions", "user:update");
-            
+
             if (!canUpdate)
             {
                 return Results.Forbid();
@@ -86,7 +85,7 @@ public static class UserEndpoint
         .WithSummary("Update user")
         .WithDescription("Kendi hesabınızı güncelleyebilir veya user:update yetkisi gerektirir.")
         .RequireAuthorization();
-        
+
         adminUsers.MapDelete("/{id}", async (Guid id, IUserService userService, ClaimsPrincipal user) =>
         {
             // Kullanıcının kendisini silip silemeyeceğini kontrol et

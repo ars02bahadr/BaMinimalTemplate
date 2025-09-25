@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Bahadır Arslan",
+  "identity": "BA.Minimal.Item.MinimalGenerator",
+  "name": "Minimal Generator (DTO/Repo/Service/Mapper/Endpoint/DbSet)",
+  "shortName": "ba-min-gen",
+  "tags": { "type": "item", "language": "C#" },
+  "sourceName": "EntityName",
+  "preferNameDirectory": false,
+  "symbols": {
+    "EntityName": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Entity class name (singular). Örn: Category",
+      "replaces": "EntityName",
+      "fileRename": "EntityName"
+    },
+    "EntityNamePlural": {
+      "type": "parameter", 
+      "datatype": "text",
+      "description": "Plural folder/route. Örn: Categories",
+      "replaces": "EntityNamePlural",
+      "fileRename": "EntityNamePlural"
+    },
+    "Namespace": {
+      "type": "bind",
+      "binding": "msbuild:RootNamespace"
+    }
+  }
+}

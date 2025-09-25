@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace BaMinimalTemplate.Endpoints;
 
-public static class UserCategoryEndpoints
+public class UserCategoryEndpoints : IEndpoint
 {
-    public static void MapUserCategoryEndpoints(this WebApplication app)
+    public void MapEndpoints(IEndpointRouteBuilder app)
     {
         var userCategories = app.MapGroup("/api/user-categories")
             .WithTags("User Categories");

@@ -34,6 +34,7 @@
 
     <ItemGroup>
         <!-- Swagger/OpenAPI -->
+        <PackageReference Include="Scrutor" Version="6.1.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.4" />
 
         <!-- Auth & Identity -->

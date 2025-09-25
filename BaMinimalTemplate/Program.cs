@@ -159,10 +159,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
-app.MapAuthEndpoints();
-app.MapUserTypeEndpoints();
-app.MapCategoryEndpoints();
-app.MapUserEndpoints();
-app.MapUserCategoryEndpoints();
+app.MapDiscoveredEndpoints();   // <— tek satır
 
 app.Run();
