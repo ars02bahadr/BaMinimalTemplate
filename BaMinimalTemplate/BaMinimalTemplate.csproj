@@ -25,11 +25,11 @@
         <!-- Dosyalar mevcutsa pakete ekle (böylece eksikse hata vermez) -->
         <PackageReadmeFile Condition="Exists('Readme.md')">Readme.md</PackageReadmeFile>
     </PropertyGroup>
+  
 
     <!-- Paket içeriğine dahil edilecek dosyalar (varsa) -->
     <ItemGroup>
         <None Include="Readme.md" Pack="true" PackagePath="\" Condition="Exists('Readme.md')" />
-        <None Include="icon.png" Pack="true" PackagePath="\" Condition="Exists('icon.png')" />
     </ItemGroup>
 
     <ItemGroup>
