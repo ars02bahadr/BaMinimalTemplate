@@ -374,7 +374,7 @@ Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICE
 
 **Bahadır Arslan**
 - GitHub: [@yourusername](https://github.com/ars02bahadr)
-- LinkedIn: [Bahadır Arslan](https://linkedin.com/in/yourprofile)
+- LinkedIn: [Bahadır Arslan](https://linkedin.com/in/bahadır-arslan-6089a81b5/)
 
 
 ---

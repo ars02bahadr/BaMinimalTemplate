@@ -12,7 +12,7 @@
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
         <PackageId>BaMinimalTemplate</PackageId>
-        <Version>1.0.4</Version>
+        <Version>1.0.5</Version>
         <Authors>Bahadır Arslan</Authors>
         <Product>BA Minimal API Template</Product>
         <Description>A comprehensive .NET 9 Minimal API template with JWT authentication, user management, Entity Framework Core, and clean architecture patterns</Description>
