@@ -48,7 +48,15 @@ public class AuthService : IAuthService
             AccessToken = accessToken,
             RefreshToken = refreshToken,
             ExpiresAt = DateTime.UtcNow.AddHours(24),
-            TokenType = "Bearer"
+            TokenType = "Bearer",
+            User = new ()
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                UserType = user.UserType == null ? null : _mapper.Map<UserTypeDto>(user.UserType)
+            }
         };
     }
 

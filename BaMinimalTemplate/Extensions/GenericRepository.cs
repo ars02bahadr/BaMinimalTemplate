@@ -77,8 +77,6 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         await _context.SaveChangesAsync();
     }
 
-
-
     public virtual async Task<(IEnumerable<T> Items, int TotalCount)> GetPagedAsync<TKey>(
         int page, 
         int pageSize, 

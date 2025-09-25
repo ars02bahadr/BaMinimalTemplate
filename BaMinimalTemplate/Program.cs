@@ -67,7 +67,20 @@ builder.Services.AddSingleton(provider => new AutoMapper.MapperConfiguration(cfg
     cfg.AddMaps(typeof(Program).Assembly);
 }).CreateMapper());
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    // User silme yetkisi policy'si
+    options.AddPolicy("CanDeleteUsers", policy =>
+        policy.RequireClaim("permissions", "user:delete"));
+    
+    // User güncelleme yetkisi policy'si
+    options.AddPolicy("CanUpdateUsers", policy =>
+        policy.RequireClaim("permissions", "user:update"));
+    
+    // Admin yetkisi policy'si
+    options.AddPolicy("AdminOnly", policy =>
+        policy.RequireClaim("permissions", "admin:full"));
+});
 builder.Services.AddApplicationServices();
 
 
@@ -146,6 +159,7 @@ app.UseAuthorization();
 app.MapAuthEndpoints();
 app.MapUserTypeEndpoints();
 app.MapCategoryEndpoints();
-
+app.MapUserEndpoints();
+app.MapUserCategoryEndpoints();
 
 app.Run();
