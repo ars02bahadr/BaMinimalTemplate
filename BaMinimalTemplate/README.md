@@ -133,6 +133,80 @@ dotnet run
 
 Uygulama `https://localhost:5001` adresinde çalışacaktır.
 
+## 🛠️ Minimal Generator Template
+
+Bu proje, yeni entity'ler için otomatik kod üretimi yapan bir **Minimal Generator** template'i içerir. Bu template ile sadece bir komutla DTO, Repository, Service, Mapper ve Endpoint dosyalarını otomatik oluşturabilirsiniz.
+
+### 📦 Template Kurulumu
+
+Template zaten projeye entegre edilmiştir. Kullanmak için:
+
+```bash
+# Proje dizinine git
+cd BaMinimalTemplate
+
+# Template'i kullan
+dotnet new ba-min-gen -E EntityAdı -En EntityAdıPlural
+```
+
+### 🚀 Kullanım Örnekleri
+
+```bash
+# Product entity'si için
+dotnet new ba-min-gen -E Product -En Products
+
+# Order entity'si için  
+dotnet new ba-min-gen -E Order -En Orders
+
+# Customer entity'si için
+dotnet new ba-min-gen -E Customer -En Customers
+```
+
+### 📁 Oluşturulan Dosyalar
+
+Template şu dosyaları otomatik oluşturur:
+
+```
+Dtos/EntityNamePlural/
+├── EntityNameDto.cs
+├── EntityNameListDto.cs
+├── EntityNameCreateDto.cs
+└── EntityNameUpdateDto.cs
+
+Repositories/EntityNamePlural/
+├── IEntityNameRepository.cs
+└── EntityNameRepository.cs
+
+Services/EntityNamePlural/
+├── IEntityNameService.cs
+└── EntityNameService.cs
+
+Mapping/
+└── EntityNameMapper.cs
+
+Endpoints/
+└── EntityNameEndpoints.cs
+```
+
+### ⚡ Otomatik Entegrasyon
+
+Template ile oluşturulan dosyalar otomatik olarak:
+- **Dependency Injection** sistemine kaydedilir (Scrutor ile)
+- **Endpoint Discovery** ile API'ye eklenir
+- **AutoMapper** profillerine dahil edilir
+- **ApplicationDbContext**'e DbSet eklenir
+
+### 🎯 Template Özellikleri
+
+- ✅ **Generic Repository Pattern** kullanır
+- ✅ **Generic Service Pattern** kullanır  
+- ✅ **AutoMapper** entegrasyonu
+- ✅ **Minimal API** endpoint'leri
+- ✅ **JWT Authorization** desteği
+- ✅ **Pagination** desteği
+- ✅ **Soft Delete** desteği
+- ✅ **Validation** desteği
+
 ## 📖 Kullanım Kılavuzu
 
 ### 🔐 Kimlik Doğrulama Endpoints

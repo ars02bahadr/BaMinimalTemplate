@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Bahadır Arslan",
+  "classifications": ["Web", "Minimal API", "JWT", "Authentication", "Clean Architecture"],
+  "identity": "BA.Minimal.Project.BaMinimalTemplate",
+  "name": "BaMinimalTemplate - .NET 9 Minimal API with JWT Auth",
+  "shortName": "ba-minimal",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "BaMinimalTemplate",
+  "preferNameDirectory": true,
+  "description": "Modern .NET 9 Minimal API template with JWT authentication, Clean Architecture, Entity Framework Core, and production-ready features.",
+  "symbols": {
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "net9.0",
+          "description": "Target net9.0"
+        }
+      ],
+      "defaultValue": "net9.0",
+      "replaces": "net9.0"
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(!enableTest)",
+          "exclude": [
+            "**/bin/**",
+            "**/obj/**",
+            "**/.vs/**",
+            "**/Templates/**"
+          ]
+        }
+      ]
+    }
+  ],
+  "primaryOutputs": [
+    {
+      "path": "BaMinimalTemplate.csproj"
+    }
+  ],
+  "defaultName": "MyMinimalApi",
+  "postActions": [
+    {
+      "condition": "(!skipRestore)",
+      "description": "Restore NuGet packages required by this project.",
+      "manualInstructions": [
+        {
+          "text": "Run 'dotnet restore'"
+        }
+      ],
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "continueOnError": true
+    },
+    {
+      "condition": "(!skipOpenInEditor)",
+      "description": "Opens the generated solution in the default editor.",
+      "manualInstructions": [
+        {
+          "text": "Manually open the generated solution file"
+        }
+      ],
+      "actionId": "84C0DA21-51C8-4541-9940-6CA9AF59EF90",
+      "args": {
+        "files": "0"
+      },
+      "continueOnError": true
+    }
+  ]
+}

@@ -24,7 +24,8 @@
     },
     "Namespace": {
       "type": "bind",
-      "binding": "msbuild:RootNamespace"
+      "binding": "msbuild:RootNamespace",
+      "replaces": "__Namespace__"
     }
   }
 }

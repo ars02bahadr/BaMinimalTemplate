@@ -12,13 +12,13 @@
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
         <PackageId>BaMinimalTemplate</PackageId>
-        <Version>1.0.0</Version>
+        <Version>1.0.4</Version>
         <Authors>Bahadır Arslan</Authors>
         <Product>BA Minimal API Template</Product>
         <Description>A comprehensive .NET 9 Minimal API template with JWT authentication, user management, Entity Framework Core, and clean architecture patterns</Description>
         <PackageTags>minimal-api;jwt;entityframework;template;asp-net-core;net9;authentication;user-management</PackageTags>
-        <PackageProjectUrl>https://github.com/yourusername/BaMinimalTemplate</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/yourusername/BaMinimalTemplate</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/ars02bahadr/BaMinimalTemplate</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/ars02bahadr/BaMinimalTemplate</RepositoryUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
