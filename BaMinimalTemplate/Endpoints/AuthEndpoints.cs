@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using BaMinimalTemplate.Dtos;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Routing;
 
 namespace BaMinimalTemplate.Endpoints;
 
@@ -110,7 +114,7 @@ public static class AuthEndpoints
                 changePasswordDto.NewPassword);
 
             if (!result)
-                return Results.BadRequest("Şifre değiştirme başarısız");
+                return Results.BadRequest("Şifre değiştirme işlemi başarısız. Mevcut şifrenizi kontrol edin.");
 
             return Results.Ok(new { message = "Şifre başarıyla değiştirildi" });
         })

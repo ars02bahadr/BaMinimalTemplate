@@ -8,6 +8,7 @@ using BaMinimalTemplate.Services.Auth;
 using BaMinimalTemplate.Services.Categories;
 using BaMinimalTemplate.Services.UserCategories;
 using BaMinimalTemplate.Services.Users;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BaMinimalTemplate.Extensions;
 

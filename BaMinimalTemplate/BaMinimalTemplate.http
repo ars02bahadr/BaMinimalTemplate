@@ -1,6 +1,387 @@
-@BaMinimalTemplate_HostAddress = http://localhost:5134
+### BaMinimalTemplate HTTP Collection
+### Bu dosya BaMinimalTemplate projesinin tüm API endpoint'lerini test etmek için kullanılır
+### Visual Studio Code REST Client extension veya IntelliJ HTTP Client ile kullanabilirsiniz
 
-GET {{BaMinimalTemplate_HostAddress}}/weatherforecast/
+@BaMinimalTemplate_HostAddress = http://localhost:5134
+@ContentType = application/json
+@AuthToken = Bearer your-jwt-token-here
+
+### ============================================
+### AUTHENTICATION ENDPOINTS
+### ============================================
+
+### 1. User Registration
+POST {{BaMinimalTemplate_HostAddress}}/api/auth/register
+Content-Type: {{ContentType}}
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "password": "Password123!",
+  "confirmPassword": "Password123!",
+  "userTypeId": null
+}
+
+### 2. User Login
+POST {{BaMinimalTemplate_HostAddress}}/api/auth/login
+Content-Type: {{ContentType}}
+
+{
+  "email": "john.doe@example.com",
+  "password": "Password123!",
+  "rememberMe": false
+}
+
+### 3. Refresh Token
+POST {{BaMinimalTemplate_HostAddress}}/api/auth/refresh
+Content-Type: {{ContentType}}
+
+{
+  "refreshToken": "your-refresh-token-here"
+}
+
+### 4. Logout (Requires Authorization)
+POST {{BaMinimalTemplate_HostAddress}}/api/auth/logout
+Authorization: {{AuthToken}}
+
+### 5. Change Password (Requires Authorization)
+POST {{BaMinimalTemplate_HostAddress}}/api/auth/change-password
+Authorization: {{AuthToken}}
+Content-Type: {{ContentType}}
+
+{
+  "currentPassword": "Password123!",
+  "newPassword": "NewPassword123!",
+  "confirmNewPassword": "NewPassword123!"
+}
+
+### 6. Forgot Password
+POST {{BaMinimalTemplate_HostAddress}}/api/auth/forgot-password
+Content-Type: {{ContentType}}
+
+{
+  "email": "john.doe@example.com"
+}
+
+### 7. Get Current User Info (Requires Authorization)
+GET {{BaMinimalTemplate_HostAddress}}/api/auth/me
+Authorization: {{AuthToken}}
+
+### ============================================
+### USER MANAGEMENT ENDPOINTS
+### ============================================
+
+### 8. Get All Users (Admin Only)
+GET {{BaMinimalTemplate_HostAddress}}/api/users/all?page=1&pageSize=10
+Authorization: {{AuthToken}}
+
+### 9. Get User by ID
+GET {{BaMinimalTemplate_HostAddress}}/api/users/{{userId}}
+Authorization: {{AuthToken}}
+
+### 10. Create User (Admin Only)
+POST {{BaMinimalTemplate_HostAddress}}/api/users/
+Authorization: {{AuthToken}}
+Content-Type: {{ContentType}}
+
+{
+  "firstName": "Jane",
+  "lastName": "Smith",
+  "userName": "jane.smith",
+  "email": "jane.smith@example.com",
+  "password": "Password123!",
+  "confirmPassword": "Password123!",
+  "userTypeId": null
+}
+
+### 11. Update User
+PUT {{BaMinimalTemplate_HostAddress}}/api/users/{{userId}}
+Authorization: {{AuthToken}}
+Content-Type: {{ContentType}}
+
+{
+  "firstName": "Jane Updated",
+  "lastName": "Smith Updated",
+  "userName": "jane.smith.updated",
+  "email": "jane.updated@example.com",
+  "userTypeId": null
+}
+
+### 12. Delete User (Admin Only)
+DELETE {{BaMinimalTemplate_HostAddress}}/api/users/{{userId}}
+Authorization: {{AuthToken}}
+
+### ============================================
+### USER TYPE ENDPOINTS
+### ============================================
+
+### 13. Get All User Types
+GET {{BaMinimalTemplate_HostAddress}}/api/user-types/all?page=1&pageSize=10
+Authorization: {{AuthToken}}
+
+### 14. Get User Type by ID
+GET {{BaMinimalTemplate_HostAddress}}/api/user-types/{{userTypeId}}
+Authorization: {{AuthToken}}
+
+### 15. Create User Type
+POST {{BaMinimalTemplate_HostAddress}}/api/user-types/
+Authorization: {{AuthToken}}
+Content-Type: {{ContentType}}
+
+{
+  "name": "Premium User",
+  "description": "Premium subscription user type"
+}
+
+### 16. Update User Type
+PUT {{BaMinimalTemplate_HostAddress}}/api/user-types/{{userTypeId}}
+Authorization: {{AuthToken}}
+Content-Type: {{ContentType}}
+
+{
+  "name": "Premium User Updated",
+  "description": "Updated premium subscription user type"
+}
+
+### 17. Delete User Type
+DELETE {{BaMinimalTemplate_HostAddress}}/api/user-types/{{userTypeId}}
+Authorization: {{AuthToken}}
+
+### ============================================
+### CATEGORY ENDPOINTS
+### ============================================
+
+### 18. Get All Categories
+GET {{BaMinimalTemplate_HostAddress}}/api/categories/all?page=1&pageSize=10
+Authorization: {{AuthToken}}
+
+### 19. Get Category by ID
+GET {{BaMinimalTemplate_HostAddress}}/api/categories/{{categoryId}}
+Authorization: {{AuthToken}}
+
+### 20. Create Category
+POST {{BaMinimalTemplate_HostAddress}}/api/categories/
+Authorization: {{AuthToken}}
+Content-Type: {{ContentType}}
+
+{
+  "name": "Technology",
+  "description": "Technology related content and resources"
+}
+
+### 21. Update Category
+PUT {{BaMinimalTemplate_HostAddress}}/api/categories/{{categoryId}}
+Authorization: {{AuthToken}}
+Content-Type: {{ContentType}}
+
+{
+  "name": "Technology Updated",
+  "description": "Updated technology related content and resources"
+}
+
+### 22. Delete Category
+DELETE {{BaMinimalTemplate_HostAddress}}/api/categories/{{categoryId}}
+Authorization: {{AuthToken}}
+
+### ============================================
+### USER CATEGORY ENDPOINTS
+### ============================================
+
+### 23. Get All User Categories
+GET {{BaMinimalTemplate_HostAddress}}/api/user-categories/all?page=1&pageSize=10
+Authorization: {{AuthToken}}
+
+### 24. Get User Category by ID
+GET {{BaMinimalTemplate_HostAddress}}/api/user-categories/{{userCategoryId}}
+Authorization: {{AuthToken}}
+
+### 25. Create User Category Assignment
+POST {{BaMinimalTemplate_HostAddress}}/api/user-categories/
+Authorization: {{AuthToken}}
+Content-Type: {{ContentType}}
+
+{
+  "userId": "{{userId}}",
+  "categoryId": "{{categoryId}}"
+}
+
+### 26. Update User Category Assignment
+PUT {{BaMinimalTemplate_HostAddress}}/api/user-categories/{{userCategoryId}}
+Authorization: {{AuthToken}}
+Content-Type: {{ContentType}}
+
+{
+  "userId": "{{userId}}",
+  "categoryId": "{{categoryId}}"
+}
+
+### 27. Delete User Category Assignment
+DELETE {{BaMinimalTemplate_HostAddress}}/api/user-categories/{{userCategoryId}}
+Authorization: {{AuthToken}}
+
+### 28. Get Categories by User ID
+GET {{BaMinimalTemplate_HostAddress}}/api/user-categories/user/{{userId}}
+Authorization: {{AuthToken}}
+
+### 29. Get Users by Category ID
+GET {{BaMinimalTemplate_HostAddress}}/api/user-categories/category/{{categoryId}}
+Authorization: {{AuthToken}}
+
+### 30. Assign Category to User (Convenience Endpoint)
+POST {{BaMinimalTemplate_HostAddress}}/api/user-categories/assign
+Authorization: {{AuthToken}}
+Content-Type: {{ContentType}}
+
+{
+  "userId": "{{userId}}",
+  "categoryId": "{{categoryId}}"
+}
+
+### 31. Remove Category from User (Convenience Endpoint)
+DELETE {{BaMinimalTemplate_HostAddress}}/api/user-categories/user/{{userId}}/category/{{categoryId}}
+Authorization: {{AuthToken}}
+
+### 32. Get Current User's Categories
+GET {{BaMinimalTemplate_HostAddress}}/api/user-categories/my-categories
+Authorization: {{AuthToken}}
+
+### ============================================
+### SWAGGER/HEALTH CHECK ENDPOINTS
+### ============================================
+
+### 33. Swagger UI
+GET {{BaMinimalTemplate_HostAddress}}/
+Accept: text/html
+
+### 34. Swagger JSON
+GET {{BaMinimalTemplate_HostAddress}}/swagger/v1/swagger.json
 Accept: application/json
 
-###
+### 35. Health Check
+GET {{BaMinimalTemplate_HostAddress}}/health
+Accept: application/json
+
+### ============================================
+### EXAMPLE WORKFLOW - Complete User Management
+### ============================================
+
+### Step 1: Register a new user
+POST {{BaMinimalTemplate_HostAddress}}/api/auth/register
+Content-Type: {{ContentType}}
+
+{
+  "firstName": "Test",
+  "lastName": "User",
+  "email": "test.user@example.com",
+  "password": "TestPassword123!",
+  "confirmPassword": "TestPassword123!"
+}
+
+### Step 2: Login with the registered user
+POST {{BaMinimalTemplate_HostAddress}}/api/auth/login
+Content-Type: {{ContentType}}
+
+{
+  "email": "test.user@example.com",
+  "password": "TestPassword123!"
+}
+
+### Step 3: Create a user type (Admin)
+POST {{BaMinimalTemplate_HostAddress}}/api/user-types/
+Authorization: {{AuthToken}}
+Content-Type: {{ContentType}}
+
+{
+  "name": "Standard User",
+  "description": "Standard user type with basic permissions"
+}
+
+### Step 4: Create a category (Admin)
+POST {{BaMinimalTemplate_HostAddress}}/api/categories/
+Authorization: {{AuthToken}}
+Content-Type: {{ContentType}}
+
+{
+  "name": "Development",
+  "description": "Software development related content"
+}
+
+### Step 5: Assign category to user
+POST {{BaMinimalTemplate_HostAddress}}/api/user-categories/assign
+Authorization: {{AuthToken}}
+Content-Type: {{ContentType}}
+
+{
+  "userId": "{{userId}}",
+  "categoryId": "{{categoryId}}"
+}
+
+### Step 6: Get current user's categories
+GET {{BaMinimalTemplate_HostAddress}}/api/user-categories/my-categories
+Authorization: {{AuthToken}}
+
+### ============================================
+### ERROR TESTING SCENARIOS
+### ============================================
+
+### Invalid Login
+POST {{BaMinimalTemplate_HostAddress}}/api/auth/login
+Content-Type: {{ContentType}}
+
+{
+  "email": "invalid@example.com",
+  "password": "wrongpassword"
+}
+
+### Invalid Registration (Missing Fields)
+POST {{BaMinimalTemplate_HostAddress}}/api/auth/register
+Content-Type: {{ContentType}}
+
+{
+  "firstName": "",
+  "lastName": "Doe",
+  "email": "invalid-email",
+  "password": "123",
+  "confirmPassword": "456"
+}
+
+### Unauthorized Access (No Token)
+GET {{BaMinimalTemplate_HostAddress}}/api/users/all
+
+### Invalid Token
+GET {{BaMinimalTemplate_HostAddress}}/api/users/all
+Authorization: Bearer invalid-token-here
+
+### Non-existent Resource
+GET {{BaMinimalTemplate_HostAddress}}/api/users/00000000-0000-0000-0000-000000000000
+Authorization: {{AuthToken}}
+
+### ============================================
+### NOTES AND USAGE INSTRUCTIONS
+### ============================================
+
+# KULLANIM TALİMATLARI:
+# 1. {{BaMinimalTemplate_HostAddress}} değişkenini kendi sunucu adresinizle değiştirin
+# 2. {{AuthToken}} değişkenini login sonrası aldığınız JWT token ile değiştirin
+# 3. {{userId}}, {{categoryId}}, {{userTypeId}} gibi placeholder'ları gerçek ID'lerle değiştirin
+# 4. Bu collection'ı Visual Studio Code REST Client extension ile kullanabilirsiniz
+# 5. IntelliJ IDEA HTTP Client ile de kullanılabilir
+# 6. Postman'e import edebilirsiniz (HTTP format olarak)
+
+# ÖNEMLİ NOTLAR:
+# - Tüm endpoint'ler JWT token gerektirir (auth endpoint'leri hariç)
+# - Admin yetkisi gerektiren endpoint'ler için uygun yetkilere sahip kullanıcı kullanın
+# - Pagination parametreleri: page (sayfa numarası), pageSize (sayfa başına kayıt sayısı)
+# - Tüm tarih/saat değerleri UTC formatında döner
+# - Error response'lar standart HTTP status kodları kullanır
+
+# RESPONSE FORMATLARI:
+# Success: 200 OK, 201 Created, 204 No Content
+# Client Error: 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found
+# Server Error: 500 Internal Server Error
+
+# TOKEN YÖNETİMİ:
+# 1. Login endpoint'inden aldığınız accessToken'ı Authorization header'ında kullanın
+# 2. Token süresi dolduğunda refreshToken ile yeni token alın
+# 3. Logout endpoint'ini çağırarak token'ı geçersiz kılın

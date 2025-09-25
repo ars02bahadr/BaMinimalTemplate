@@ -1,5 +1,7 @@
 using BaMinimalTemplate.Dtos;
 using BaMinimalTemplate.Services;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 
 namespace BaMinimalTemplate.Endpoints;
 

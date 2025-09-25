@@ -10,6 +10,9 @@ using BaMinimalTemplate.Data;
 using BaMinimalTemplate.Endpoints;
 using BaMinimalTemplate.Extensions;
 using BaMinimalTemplate.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 

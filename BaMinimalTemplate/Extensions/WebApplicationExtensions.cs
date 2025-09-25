@@ -1,6 +1,8 @@
 using BaMinimalTemplate.Data;
 using BaMinimalTemplate.Models;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BaMinimalTemplate.Extensions;
 

@@ -3,6 +3,9 @@ using BaMinimalTemplate.Services.UserCategories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace BaMinimalTemplate.Endpoints;
 

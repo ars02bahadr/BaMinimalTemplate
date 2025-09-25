@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using BaMinimalTemplate.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace BaMinimalTemplate.Extensions;

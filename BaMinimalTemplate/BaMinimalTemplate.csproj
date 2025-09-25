@@ -4,48 +4,59 @@
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+
+        <!-- NuGet Package -->
+        <IsPackable>true</IsPackable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+        <PackageId>BaMinimalTemplate</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>Bahadır Arslan</Authors>
+        <Product>BA Minimal API Template</Product>
+        <Description>A comprehensive .NET 9 Minimal API template with JWT authentication, user management, Entity Framework Core, and clean architecture patterns</Description>
+        <PackageTags>minimal-api;jwt;entityframework;template;asp-net-core;net9;authentication;user-management</PackageTags>
+        <PackageProjectUrl>https://github.com/yourusername/BaMinimalTemplate</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/yourusername/BaMinimalTemplate</RepositoryUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+
+        <!-- Dosyalar mevcutsa pakete ekle (böylece eksikse hata vermez) -->
+        <PackageReadmeFile Condition="Exists('Readme.md')">Readme.md</PackageReadmeFile>
     </PropertyGroup>
 
+    <!-- Paket içeriğine dahil edilecek dosyalar (varsa) -->
     <ItemGroup>
-        <!-- Swagger/OpenAPI Documentation -->
+        <None Include="Readme.md" Pack="true" PackagePath="\" Condition="Exists('Readme.md')" />
+        <None Include="icon.png" Pack="true" PackagePath="\" Condition="Exists('icon.png')" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Swagger/OpenAPI -->
         <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.4" />
 
-        <!-- Authentication & Authorization -->
+        <!-- Auth & Identity -->
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.0" />
 
-        <!-- Database & Entity Framework -->
+        <!-- EF Core -->
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
 
-        <!-- Object Mapping -->
-        <PackageReference Include="AutoMapper" Version="13.0.1" />
+        <!-- AutoMapper (sürüm uyuşmazlığını çözmek için her ikisi de 13.x) -->
+        <PackageReference Include="AutoMapper" Version="12.0.1" />
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
 
-        <!-- Validation -->
+        <!-- FluentValidation -->
         <PackageReference Include="FluentValidation" Version="11.11.0" />
         <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
-
-        <!-- Logging -->
-        <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
-        <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
-        <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
-
-        <!-- JSON Handling (güvenlik açığı düzeltildi) -->
-        <PackageReference Include="System.Text.Json" Version="9.0.0" />
-
-        <!-- HTTP Client -->
-        <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.0" />
-
-        <!-- Configuration -->
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="9.0.0" />
-
-        <!-- Health Checks -->
-        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="9.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="9.0.0" />
     </ItemGroup>
 
 </Project>

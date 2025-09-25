@@ -2,6 +2,8 @@ using BaMinimalTemplate.Dtos.Categories;
 using BaMinimalTemplate.Services.Categories;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 
 namespace BaMinimalTemplate.Endpoints;
 
